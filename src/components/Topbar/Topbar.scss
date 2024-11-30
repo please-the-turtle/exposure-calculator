@@ -1,0 +1,39 @@
+@use '/src/vars';
+
+.topbar-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: right;
+    padding: .5rem;
+}
+
+.topbar-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: fit-content;
+    height: fit-content;
+    padding: .4rem;
+    gap: .4rem;
+    border-radius: 500px;
+    @include vars.blured-background;
+    @include vars.soft-shadow;
+}
+
+.topbar-info-item {
+    display: flex;
+    align-items: center;
+    img {
+        width: 2.4rem;
+        height: 2.4rem;
+    }
+}
+
+.topbar-info-button {
+    padding: 0;
+    margin: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
