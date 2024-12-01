@@ -1,5 +1,24 @@
 @use './normalize.scss';
 
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+
+* {
+  font-size: 16pt;
+  font-weight: 500;
+  font-family: "Nunito Sans", serif;
+  font-optical-sizing: auto;
+  font-variation-settings:
+    "wdth" 100,
+    "YTLC" 500;
+}
+
+button {
+  border: 2px solid rgba($color: #000000, $alpha: 1.0);
+  border-radius: .5rem;
+  padding: .2rem .4rem;
+  background: none;
+}
+
 #root {
   position: absolute;
   top: 0;
@@ -8,4 +27,9 @@
   margin: 0;
   padding: 0;
   height: 100%;
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
 }

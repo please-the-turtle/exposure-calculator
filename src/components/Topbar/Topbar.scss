@@ -14,8 +14,8 @@
     align-items: center;
     width: fit-content;
     height: fit-content;
-    padding: .4rem;
-    gap: .4rem;
+    padding: .3rem;
+    gap: .3rem;
     border-radius: 500px;
     @include vars.blured-background;
     @include vars.soft-shadow;
@@ -25,8 +25,8 @@
     display: flex;
     align-items: center;
     img {
-        width: 2.4rem;
-        height: 2.4rem;
+        width: 1.8rem;
+        height: 1.8rem;
     }
 }
 
