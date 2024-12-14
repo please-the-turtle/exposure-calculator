@@ -1,39 +1,53 @@
-@use '/src/vars';
+@use "/src/vars";
 
 .topbar-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: right;
-    padding: .5rem;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: right;
+  flex-grow: 1;
+  z-index: 800;
 }
 
 .topbar-info {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: fit-content;
-    height: fit-content;
-    padding: .3rem;
-    gap: .3rem;
-    border-radius: 500px;
-    @include vars.blured-background;
-    @include vars.soft-shadow;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: fit-content;
+  height: fit-content;
+  padding: 0.3rem;
+  margin: 0.5rem;
+  gap: 0.3rem;
+  border-radius: 500px;
+  @include vars.glass;
 }
 
 .topbar-info-item {
-    display: flex;
-    align-items: center;
-    img {
-        width: 1.8rem;
-        height: 1.8rem;
-    }
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
 }
 
 .topbar-info-button {
-    padding: 0;
-    margin: 0;
-    background: none;
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  box-shadow: none;
+
+  &:active {
+    box-shadow: none;
+  }
+
+  &:not(:active):hover {
     border: none;
-    cursor: pointer;
+  }
 }

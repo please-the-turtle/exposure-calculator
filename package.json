@@ -10,9 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@egjs/react-flicking": "^4.11.4",
     "motion": "^11.12.0",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "swiper": "^11.1.15"
   },
   "devDependencies": {
     "@eslint/js": "^9.15.0",

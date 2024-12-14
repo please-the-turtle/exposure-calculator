@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="536.859" height="667" viewBox="0 0 536.859 667" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g id="lamp" transform="translate(33.5 33.5)">
+    <path id="Path" d="M323.128 0C323.128 0 146.733 0 146.733 0C119.473 0 94.9591 16.5967 84.8347 41.907C84.8347 41.907 4.83409 241.907 4.83409 241.907C-12.6826 285.697 19.5681 333.333 66.7324 333.333C66.7324 333.333 403.128 333.333 403.128 333.333C450.292 333.333 482.542 285.7 465.025 241.907C465.025 241.907 385.028 41.9077 385.028 41.9077C374.902 16.597 350.388 0 323.128 0C323.128 0 323.128 0 323.128 0Z" fill="none" stroke-width="67" stroke="#B3B3B3" stroke-linecap="round" />
+    <path id="Path" d="M0 0L266.667 0" fill="none" stroke-width="67" stroke="#B3B3B3" stroke-linecap="round" stroke-linejoin="round" transform="translate(101.598 600)" />
+    <path id="Path" d="M0 250L0 0" fill="none" stroke-width="67" stroke="#B3B3B3" stroke-linecap="round" stroke-linejoin="round" transform="translate(234.932 350)" />
+  </g>
+</svg>

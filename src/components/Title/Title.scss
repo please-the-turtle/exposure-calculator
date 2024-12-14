@@ -1,0 +1,15 @@
+.title-container {
+  display: flex;
+  flex-direction: row;
+  padding: 0 1rem;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.title-text {
+  font-weight: 800;
+}
+
+.title-icon {
+}
