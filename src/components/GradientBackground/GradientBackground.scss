@@ -1,0 +1,11 @@
+.gradient-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -100;
+
+  background-size: 200% 150%;
+  background-position: 50% 10%;
+}

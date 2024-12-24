@@ -1,0 +1,58 @@
+@use "/src/vars";
+
+$accent-color: rgba(
+  $color: #4dafff,
+  $alpha: 0.5,
+);
+
+.tab-panel-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  height: 60vh;
+}
+
+.tab-panel-tabs-container {
+  height: fit-content;
+  gap: 0.2rem;
+  display: flex;
+  overflow: visible;
+  justify-content: stretch;
+  border-radius: 0.4rem;
+}
+
+.tab-button {
+  width: 100%;
+  text-align: center;
+  user-select: none;
+  cursor: pointer;
+  padding: 0.1rem;
+  border-radius: 0.4rem;
+  font-weight: 500;
+
+  box-shadow: none;
+  &:active {
+    box-shadow: none;
+  }
+}
+
+.tab-button-active {
+  font-weight: 700;
+  background-color: $accent-color;
+  @include vars.soft-shadow;
+  &:active {
+    box-shadow: none;
+    @include vars.soft-shadow;
+  }
+}
+
+.tab-panel-content-container {
+  overflow-y: auto;
+  height: 100%;
+  border-radius: .4rem;
+}
+
+.tab-container {
+  height: 100%;
+}

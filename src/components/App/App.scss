@@ -17,25 +17,12 @@ body {
   width: auto;
   max-width: 1024px;
   height: 100vh;
+  gap: 0.4rem;
 }
 
 main {
   display: flex;
   flex-direction: column;
-  gap: .4rem;
-  margin: 0 .5rem;
-  margin-bottom: .5rem;
-}
-
-.flex-vertical {
-  display: flex;
-  flex-direction: column;
-  gap: .4rem;
-}
-
-.flex-horizontal {
-  display: flex;
-  flex-direction: row;
-  justify-content: stretch;
-  gap: .4rem;
+  gap: 0.4rem;
+  padding: 0 0.5rem;
 }
