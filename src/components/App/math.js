@@ -24,6 +24,20 @@ export function getAperture(shutterSpeed, ev, iso) {
 }
 
 /**
+ * Calculates exposure value based on sunny 16 rule
+ * @param {*} aperture f-number
+ * @param {*} shutterSpeed shutter speed in seconds
+ * @param {*} iso ISO value
+ * @returns Exposure value
+ */
+export function getEv(aperture, shutterSpeed, iso) {
+  return (
+    Math.log2((aperture * aperture) / shutterSpeed) +
+    Math.log2(iso / 100) * aperture
+  );
+}
+
+/**
  * Finds the slide index that best matches the target value
  * @param {*} slideItems array of slide items @see{@link /src/slides/index.js}
  * @param {*} target target value for search by item.value

@@ -7,7 +7,12 @@ import {
   apertureItems,
   shutterSpeedItems,
 } from "../../slides";
-import { getAperture, getShutterSpeed, findClosestInSlideItems } from "./math";
+import {
+  getAperture,
+  getShutterSpeed,
+  findClosestInSlideItems,
+  getEv,
+} from "./math";
 import Topbar from "../Topbar";
 import InfoButtons from "../InfoButtons";
 import Warning from "../Warning";
@@ -50,11 +55,17 @@ function App() {
   }, [isoCurrentSlide]);
 
   useEffect(() => {
-    const { aperture, iso, ev } = getCurrentValues();
-    const newShutterSpeed = getShutterSpeed(aperture, ev, iso);
+    let { aperture, iso, ev } = getCurrentValues();
+    const shutterSpeed = getShutterSpeed(aperture, ev, iso);
+    const realEv = getEv(aperture, shutterSpeed, iso);
+    if (Math.abs(realEv - ev) > 1) {
+      aperture = getAperture(shutterSpeed, ev, iso);
+      const newSlideIndex = findClosestInSlideItems(apertureItems, aperture);
+      setApertureCurrentSlide(newSlideIndex);
+    }
     const newSlideIndex = findClosestInSlideItems(
       shutterSpeedItems,
-      newShutterSpeed
+      shutterSpeed
     );
     setSsCurrentSlide(newSlideIndex);
   }, [apertureCurrentSlide]);
