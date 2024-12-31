@@ -12,7 +12,7 @@ export default function InfoButtons() {
   const [isInfoPopupOpen, setInfoPopupOpen] = useState(false);
 
   return (
-    <>
+    <div>
       <InfoPopup
         isOpen={isInfoPopupOpen}
         onClose={() => setInfoPopupOpen(false)}
@@ -30,7 +30,7 @@ export default function InfoButtons() {
           <img src={github} alt="github page" />
         </a>
       </div>
-    </>
+    </div>
   );
 }
 
