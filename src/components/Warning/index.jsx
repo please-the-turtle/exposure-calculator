@@ -4,15 +4,15 @@ import { motion, AnimatePresence } from "motion/react";
 import "./Warning.scss";
 import dotsIcon from "./dots.svg";
 
-export default function Warning({ message, popupInfo }) {
+export default function Warning({ message, popupContent }) {
   const [isInfoPopupOpen, setInfoPopupOpen] = useState(false);
 
   return (
     <>
-      {popupInfo && (
+      {popupContent && (
         <Popup isOpen={isInfoPopupOpen} onClose={() => setInfoPopupOpen(false)}>
-          <h2>{message}</h2>
-          <div>{popupInfo}</div>
+          <h2 className="warning-popup-header">{message}</h2>
+          <div className="warning-popup-content">{popupContent}</div>
         </Popup>
       )}
       <AnimatePresence>
@@ -22,15 +22,12 @@ export default function Warning({ message, popupInfo }) {
             initial={{ y: "-150%" }}
             animate={{ y: "0%" }}
             exit={{ y: "-150%" }}
-            onAnimationComplete={(definition) => {
-              console.log("Animation complete:", definition);
-            }}
             className="warning-container"
           >
             <div className="warning">
               <p>🙀</p>
               <div className="warning-message">{message}</div>
-              {popupInfo && (
+              {popupContent && (
                 <button
                   className="warning-info-button"
                   onClick={() => setInfoPopupOpen(true)}

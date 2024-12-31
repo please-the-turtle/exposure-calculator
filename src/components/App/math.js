@@ -6,8 +6,8 @@
  * @returns Shutter speed number
  */
 export function getShutterSpeed(aperture, ev, iso) {
-  const numerator = aperture * aperture * iso;
-  const denominator = 100 * Math.pow(2, ev);
+  const numerator = aperture * aperture * 100;
+  const denominator = iso * Math.pow(2, ev);
   return numerator / denominator;
 }
 
@@ -19,8 +19,8 @@ export function getShutterSpeed(aperture, ev, iso) {
  * @returns Shutter speed number
  */
 export function getAperture(shutterSpeed, ev, iso) {
-  const numerator = 100 * shutterSpeed * Math.pow(2, ev);
-  return Math.sqrt(numerator / iso);
+  const numerator = iso * shutterSpeed * Math.pow(2, ev);
+  return Math.sqrt(numerator / 100);
 }
 
 /**
@@ -31,10 +31,7 @@ export function getAperture(shutterSpeed, ev, iso) {
  * @returns Exposure value
  */
 export function getEv(aperture, shutterSpeed, iso) {
-  return (
-    Math.log2((aperture * aperture) / shutterSpeed) +
-    Math.log2(iso / 100) * aperture
-  );
+  return Math.log2((100 * aperture * aperture) / shutterSpeed / iso);
 }
 
 /**

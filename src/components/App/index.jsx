@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Card from "../Card";
 import Carousel from "../Carousel";
 import {
@@ -20,15 +20,16 @@ import "./App.scss";
 import GradientBackground from "../GradientBackground";
 import { ThemeProvider } from "../ThemeProvider";
 import { darkCold } from "../ThemeProvider/themes";
+import { div } from "motion/react-client";
 
-function App() {
-  const [evCurrentSlide, setEvCurrentSlide] = useState(0);
-  const [isoCurrentSlide, setIsoCurrentSlide] = useState(0);
+export default function App() {
+  const [evCurrentSlide, setEvCurrentSlide] = useState(11);
+  const [isoCurrentSlide, setIsoCurrentSlide] = useState(3);
   const [apertureCurrentSlide, setApertureCurrentSlide] = useState(0);
   const [ssCurrentSlide, setSsCurrentSlide] = useState(0);
 
   const [theme, setTheme] = useState(darkCold);
-  const [warningMessage, setWarningMessage] = useState("Underexposed");
+  const [warning, setWarning] = useState();
 
   function getCurrentValues() {
     const aperture = apertureItems[apertureCurrentSlide].value;
@@ -40,10 +41,6 @@ function App() {
   }
 
   useEffect(() => {
-    const { shutterSpeed, iso, ev } = getCurrentValues();
-    const newAperture = getAperture(shutterSpeed, ev, iso);
-    const newSlideIndex = findClosestInSlideItems(apertureItems, newAperture);
-    setApertureCurrentSlide(newSlideIndex);
     setTheme(evItems[evCurrentSlide].theme);
   }, [evCurrentSlide]);
 
@@ -52,21 +49,25 @@ function App() {
     const newAperture = getAperture(shutterSpeed, ev, iso);
     const newSlideIndex = findClosestInSlideItems(apertureItems, newAperture);
     setApertureCurrentSlide(newSlideIndex);
-  }, [isoCurrentSlide]);
+  }, [isoCurrentSlide, evCurrentSlide]);
 
   useEffect(() => {
     let { aperture, iso, ev } = getCurrentValues();
-    const shutterSpeed = getShutterSpeed(aperture, ev, iso);
-    const realEv = getEv(aperture, shutterSpeed, iso);
-    if (Math.abs(realEv - ev) > 1) {
-      aperture = getAperture(shutterSpeed, ev, iso);
-      const newSlideIndex = findClosestInSlideItems(apertureItems, aperture);
-      setApertureCurrentSlide(newSlideIndex);
-    }
-    const newSlideIndex = findClosestInSlideItems(
+    let newShutterSpeed = getShutterSpeed(aperture, ev, iso);
+    let newSlideIndex = findClosestInSlideItems(
       shutterSpeedItems,
-      shutterSpeed
+      newShutterSpeed
     );
+
+    const realEv = getEv(aperture, shutterSpeedItems[newSlideIndex].value, iso);
+    if (Math.abs(ev - realEv) >= 1) {
+      newShutterSpeed = getShutterSpeed(aperture, ev, iso);
+      newSlideIndex = findClosestInSlideItems(
+        shutterSpeedItems,
+        newShutterSpeed
+      );
+    }
+
     setSsCurrentSlide(newSlideIndex);
   }, [apertureCurrentSlide]);
 
@@ -77,12 +78,33 @@ function App() {
     setApertureCurrentSlide(newSlideIndex);
   }, [ssCurrentSlide]);
 
+  useEffect(() => {
+    const { ev, aperture, shutterSpeed, iso } = getCurrentValues();
+    const realEv = getEv(aperture, shutterSpeed, iso);
+    if (ev - realEv < 0) {
+      setWarning({
+        message: "Underexposed",
+        popupContent: <WarningContent currentValues={getCurrentValues()} />,
+      });
+    } else if (ev - realEv > 1) {
+      setWarning({
+        message: "Overexposed",
+        popupContent: <WarningContent currentValues={getCurrentValues()} />,
+      });
+    } else {
+      setWarning({});
+    }
+  }, [apertureCurrentSlide, ssCurrentSlide, evCurrentSlide, isoCurrentSlide]);
+
   return (
     <ThemeProvider theme={theme}>
       <div className="wrapper">
         <GradientBackground />
         <Topbar>
-          <Warning message={warningMessage} popupInfo="So bad" />
+          <Warning
+            message={warning?.message}
+            popupContent={warning?.popupContent}
+          />
           <InfoButtons />
         </Topbar>
         <main>
@@ -120,4 +142,43 @@ function App() {
   );
 }
 
-export default App;
+function WarningContent({ currentValues }) {
+  const [realEv, setRealEv] = useState();
+  const [shutterSpeed, setShutterSpeed] = useState();
+
+  useEffect(() => {
+    const realEv = getEv(
+      currentValues.aperture,
+      currentValues.shutterSpeed,
+      currentValues.iso
+    );
+    setRealEv(Math.round(realEv));
+    setShutterSpeed(
+      getShutterSpeed(
+        currentValues.aperture,
+        currentValues.ev,
+        currentValues.iso
+      ).toFixed(4)
+    );
+  }, []);
+
+  return (
+    <>
+      <h3>
+        The frame will be too {currentValues.ev < realEv ? "dark" : "bright"}.
+      </h3>
+      <p>
+        <b>Your EV: </b>
+        {currentValues.ev}
+      </p>
+      <p>
+        <b>EV for current configuration: </b>
+        {realEv}({currentValues.ev - realEv})
+      </p>
+      <p>
+        <b>Shutter speed for correct exposure: </b>
+        {shutterSpeed}s
+      </p>
+    </>
+  );
+}
