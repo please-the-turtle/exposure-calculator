@@ -1,0 +1,18 @@
+.about-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    h1 {
+        font-size: 1.25rem;
+        font-weight: 700; 
+        padding-bottom: .25rem;
+    }
+    h2 {
+        font-size: 1.1rem;
+        font-weight: 700; 
+        padding-bottom: .25rem;
+    }
+    p {
+        padding-bottom: .25rem;
+    }
+}

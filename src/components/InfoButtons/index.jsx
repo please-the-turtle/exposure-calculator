@@ -24,7 +24,7 @@ export default function InfoButtons() {
         <a
           target="_blank"
           rel="noopener noreferrer"
-          href="https://www.github.com"
+          href="https://github.com/please-the-turtle/exposure-calculator"
           className="info-item"
         >
           <img src={github} alt="github page" />
